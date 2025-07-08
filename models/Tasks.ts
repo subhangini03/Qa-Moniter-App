@@ -46,8 +46,8 @@ const TaskSchema: Schema = new Schema({
 });
 
 // Add indexes for better query performance
-TaskSchema.index({ unitTestLabel: 1 });
-TaskSchema.index({ tags: 1 });
-TaskSchema.index({ createdAt: -1 });
+// TaskSchema.index({ unitTestLabel: 1 });
+// TaskSchema.index({ tags: 1 });
+// TaskSchema.index({ createdAt: -1 });
 
 export default mongoose.models.Task || mongoose.model<ITask>('Task', TaskSchema);

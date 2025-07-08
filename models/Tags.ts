@@ -42,9 +42,9 @@ const TagSchema: Schema = new Schema({
 });
 
 // Add indexes
-TagSchema.index({ label: 1 });
-TagSchema.index({ tagType: 1 });
-TagSchema.index({ createdBy: 1 });
-TagSchema.index({ isActive: 1 });
+// TagSchema.index({ label: 1 });
+// TagSchema.index({ tagType: 1 });
+// TagSchema.index({ createdBy: 1 });
+// TagSchema.index({ isActive: 1 });
 
-export default mongoose.models.Tag || mongoose.model<ITag>('Tags', TagSchema);
+export default mongoose.models.Tags || mongoose.model<ITag>('Tags', TagSchema);

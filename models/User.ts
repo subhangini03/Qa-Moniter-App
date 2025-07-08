@@ -65,8 +65,8 @@ UserSchema.methods.comparePassword = async function(candidatePassword: string): 
 };
 
 // Add indexes
-UserSchema.index({ email: 1 });
-UserSchema.index({ role: 1 });
-UserSchema.index({ isActive: 1 });
+// UserSchema.index({ email: 1 });
+// UserSchema.index({ role: 1 });
+// UserSchema.index({ isActive: 1 });
 
 export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);

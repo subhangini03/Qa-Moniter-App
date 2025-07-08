@@ -120,7 +120,7 @@ export default function LoginPage() {
               <span className="font-medium">Trusted by 500+ Teams</span>
             </div>
             <p className="text-sm text-blue-100">
-              "QAMonitorTool has transformed our testing process, reducing bugs by 60% and improving deployment confidence."
+              &quot;QAMonitorTool has transformed our testing process, reducing bugs by 60% and improving deployment confidence.&quot;         
             </p>
             <p className="text-sm text-blue-200 mt-2 font-medium">- Sarah Chen, QA Lead at TechCorp</p>
           </div>
@@ -208,7 +208,7 @@ export default function LoginPage() {
 
               <div className="mt-8 text-center">
                 <p className="text-sm text-gray-600">
-                  Don't have an account?{' '}
+                  Don&apos;t have an account?{' '}
                   <Link href="/register" className="text-blue-600 hover:text-blue-800 font-semibold transition-colors">
                     Create Account
                   </Link>
