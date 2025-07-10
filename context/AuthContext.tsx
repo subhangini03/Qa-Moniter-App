@@ -106,10 +106,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await axios.post('/api/auth/login', { email, password });
 
       if (response.data.success) {
-        const { token, user } = response.data.data;
+        const { token } = response.data.data;
         localStorage.setItem('auth-token', token);
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        dispatch({ type: 'SET_USER', payload: user });
+        await checkAuth(); // ✅ refresh user state
       } else {
         throw new Error(response.data.error || 'Login failed');
       }
@@ -127,17 +127,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       const response = await axios.post('/api/auth/register', { name, email, password, role });
 
-      if (response.data.success) {
-        const { token, user } = response.data.data;
-        localStorage.setItem('auth-token', token);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        dispatch({ type: 'SET_USER', payload: user });
-      } else {
+      if (!response.data.success) {
         throw new Error(response.data.error || 'Registration failed');
       }
+      dispatch({ type: 'SET_LOADING', payload: false });
     } catch (error: any) {
       const errorMessage = error.response?.data?.error || error.message || 'Registration failed';
       dispatch({ type: 'SET_ERROR', payload: errorMessage });
+      dispatch({ type: 'SET_LOADING', payload: false });
       throw error;
     }
   };
@@ -150,17 +147,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const checkAuth = async () => {
     try {
-      const token = localStorage.getItem('auth-token');
+      const token = localStorage.getItem("auth-token");
       if (!token) {
-        dispatch({ type: 'SET_LOADING', payload: false });
+        dispatch({ type: "SET_LOADING", payload: false });
         return;
       }
 
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      const response = await axios.get('/api/auth/me');
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const response = await axios.get("/api/auth/me");
 
       if (response.data.success) {
-        dispatch({ type: 'SET_USER', payload: response.data.data });
+        dispatch({ type: "SET_USER", payload: response.data.data });
       } else {
         logout();
       }
